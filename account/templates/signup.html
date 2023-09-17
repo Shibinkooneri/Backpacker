@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% block content %}
+<div>
+  {% if messages %}
+      {% for i in messages %}
+          {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          <div class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>{{i}}</strong>
+            </div>
+          {%endif%}
+          {% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+          <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>{{i}}</strong>
+            </div>
+          {%endif%}
+      {%endfor%}
+  {% endif %}
+</div>
+    <div class="container jumbotron" style="background-color: #67b0d1">
+        <form class="reg" action="" method="post">
+            {%csrf_token%}
+              <h3>User SignUp</h3>
+                {{form.as_table}}
+            <div>
+              <button class=" btn btn-success">Sign up</button>
+            </div>
+        </form>
+
+{% endblock content %}

@@ -1,0 +1,105 @@
+{% extends 'navbar.html' %}
+{% block nav %}
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2></h2>
+          <ol>
+            <li><a href="{% url 'userhome' %}">Home</a></li>
+            <li></li>
+          </ol>
+        </div>
+        <div>
+            {% if messages %}
+                {% for i in messages %}
+                    {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>{{i}}</strong>
+                      </div>
+                    {%endif%}
+                    {% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>{{i}}</strong>
+                      </div>
+                    {%endif%}
+                {%endfor%}
+            {% endif %}
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+    
+    <div class="container-fluid p-0">
+      <div id="header-carousel" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <img class="w-100" height="650px" src="https://www.pixelstalk.net/wp-content/uploads/2016/07/Wallpapers-pexels-photo.jpg" alt="Image">
+                  <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                      <section class="inner-page">
+                        <div class="p-3" style="max-width: 900px;">
+                            <form action=""  method="post">
+                              {% csrf_token %}
+                              <h1>Plan Your Trip</h1>
+                              <table class="jumbotron">
+                              {{f}}
+                              </table>
+                              <button class="btn btn-outline-dark">POST</button>
+                            </form>
+                        </div>
+                      </section>
+                  </div>
+              </div>
+      </div>
+  </div>
+    
+    <section class="inner-page">
+      <div class="container-fluid p-0">
+        <div id="header-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" height="650px" src="https://th.bing.com/th/id/R.389bb2efed116e13536cb1b854d0eca2?rik=JDU1VlOxWSOIkA&riu=http%3a%2f%2fthewowstyle.com%2fwp-content%2fuploads%2f2015%2f01%2fFree-Wallpaper-Nature-Scenes.jpg&ehk=Xcw64uT9IspURIdu%2bOLlFZdLsoXQb0ePcTKFm%2bTRvpQ%3d&risl=&pid=ImgRaw&r=0" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <section class="inner-page">
+                          <div class="jumbotron">
+                            <div class="p-3" style="max-width: 900px;">
+                              <h1>Available Travel plans</h1>
+                              <table class="table">
+                                  <tr>
+                                      <th>Wanderer</th>
+                                      <th>Destination</th>
+                                      <th>Starting Location</th>
+                                      <th>Description</th>
+                                      <th></th>
+                                  </tr>
+                                  {%for i in li%}
+                                  <tr>
+                                      <td>{{i.invite.user.first_name}} {{i.invite.user.last_name}}</td>
+                                      <td>{{i.invite.Destination}}</td>
+                                      <td>{{i.invite.Location}}</td>
+                                      <td>{{i.invite.Description}}</td>
+                                      <td><a href="{% url 'room' i.slug %}">Chat</a></td>
+                                  </tr>
+                  
+                                  {%endfor%}
+                              </table>
+                            </div>
+                          </div>
+                        </section>
+                    </div>
+                </div>
+        </div>
+          
+    </section>
+  </div>
+    <div class="col-lg-12">
+        <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+      </div>
+
+  </main><!-- End #main -->
+{% endblock nav %}
